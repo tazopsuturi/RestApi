@@ -3,17 +3,22 @@ import com.google.gson.GsonBuilder;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.Map;
 
-public class FindPost {
-	Response response;
+public class FindPostTest {
+	public RequestSpecification request;
+	public Response response;
 	
 	@Test
 	public void testGetPosts() {
-		response = RestAssured.get("https://jsonplaceholder.typicode.com/posts");
+		RestAssured.baseURI = "https://jsonplaceholder.typicode.com";
+		
+		request = RestAssured.given();
+		response = request.get("/posts");
 		
 		JsonPath jsonPath = response.jsonPath();
 		

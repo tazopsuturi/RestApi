@@ -9,13 +9,15 @@ import io.restassured.response.Response;
 import java.util.List;
 import java.util.Map;
 
-public class GetPosts {
+public class GetPostsTest {
 	
 	public Response response;
 	
 	@Test
 	public void testGetPosts() {
-		response = RestAssured.get("https://jsonplaceholder.typicode.com/posts");
+		RestAssured.baseURI = "https://jsonplaceholder.typicode.com";
+		
+		response = RestAssured.get("/posts");
 		
 		int statusCode = response.getStatusCode();
 		
